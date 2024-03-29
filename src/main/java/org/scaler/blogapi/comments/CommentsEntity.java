@@ -1,19 +1,28 @@
 package org.scaler.blogapi.comments;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import org.scaler.blogapi.articles.ArticleEntity;
+import org.scaler.blogapi.common.BaseEntity;
+import org.scaler.blogapi.users.UserEntity;
 
 import java.util.UUID;
 
+@Getter
 @Entity(name = "comments")
-public class CommentsEntity {
+public class CommentsEntity extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id",nullable = false)
-    private UUID id;
+    @Column(length = 100)
+    String title;
+
+    @Column(nullable = false,length = 1000)
+    String body;
+
+    @ManyToOne
+    UserEntity author;
+
+    @ManyToOne
+    ArticleEntity article;
 
 
-    public UUID getId() {
-        return id;
-    }
 }
