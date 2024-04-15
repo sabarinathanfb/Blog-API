@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.scaler.blogapi.common.BaseEntity;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -23,6 +24,11 @@ public class UserEntity extends BaseEntity {
     String password;
     @Column
     String bio;
+
+    @ManyToMany()
+    List<UserEntity> followers;
+    @ManyToMany()
+    List<UserEntity> following;
 
 
 
