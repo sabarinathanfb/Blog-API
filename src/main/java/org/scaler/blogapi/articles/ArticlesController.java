@@ -20,8 +20,9 @@ public class ArticlesController {
         return null;
     }
 
-    @PostMapping("")
+    @PostMapping("/{id}")
     ResponseEntity<Void> createArticle() {
+
         return null;
     }
 
@@ -39,6 +40,7 @@ public class ArticlesController {
 
     @PutMapping("/{id}/like")
     ResponseEntity<Void> likeArticle(){
+
         return null;
     }
 
