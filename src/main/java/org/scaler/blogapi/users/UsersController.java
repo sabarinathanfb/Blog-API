@@ -2,6 +2,7 @@ package org.scaler.blogapi.users;
 
 import org.apache.catalina.User;
 import org.modelmapper.ModelMapper;
+import org.scaler.blogapi.security.TokenService;
 import org.scaler.blogapi.users.dto.CreateUserRequestDTO;
 import org.scaler.blogapi.users.dto.LoginUserRequestDTO;
 import org.scaler.blogapi.users.dto.UserResponseDTO;
@@ -14,13 +15,17 @@ import org.springframework.web.bind.annotation.*;
 public class UsersController {
     private final UsersService usersService;
     private final ModelMapper modelMapper;
+    private final TokenService tokenService;
 
     public UsersController(
             @Autowired UsersService usersService,
-            @Autowired ModelMapper modelMapper
+            @Autowired ModelMapper modelMapper,
+            @Autowired TokenService tokenService
+
     ) {
         this.usersService = usersService;
         this.modelMapper = modelMapper;
+        this.tokenService = tokenService;
     }
 
     @PostMapping("/signup")
@@ -33,6 +38,7 @@ public class UsersController {
 
         );
         var userResponse = modelMapper.map(savedUser,UserResponseDTO.class);
+        userResponse.setToken(tokenService.createAuthToken(savedUser.getUsername()));
         return ResponseEntity.accepted().body(userResponse);
 
     }
@@ -47,7 +53,7 @@ public class UsersController {
 
 
         var userResponse = modelMapper.map(savedUser, UserResponseDTO.class);
-
+        userResponse.setToken(tokenService.createAuthToken(savedUser.getUsername()));
         return ResponseEntity.accepted().body(userResponse);
 
     }
