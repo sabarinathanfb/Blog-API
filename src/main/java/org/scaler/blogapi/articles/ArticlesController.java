@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 public class ArticlesController {
 
     @GetMapping("")
-    ResponseEntity<Void> getAllArticles(){
+    ResponseEntity<String> getAllArticles(){
 
-        return  null;
+        return  ResponseEntity.ok("All articles");
     }
 
     @GetMapping("/{id}")

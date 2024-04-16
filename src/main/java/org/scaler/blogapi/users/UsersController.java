@@ -1,36 +1,55 @@
 package org.scaler.blogapi.users;
 
+import org.apache.catalina.User;
+import org.modelmapper.ModelMapper;
+import org.scaler.blogapi.users.dto.CreateUserRequestDTO;
+import org.scaler.blogapi.users.dto.LoginUserRequestDTO;
 import org.scaler.blogapi.users.dto.UserResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
 public class UsersController {
     private final UsersService usersService;
+    private final ModelMapper modelMapper;
 
-    public UsersController( UsersService usersService) {
+    public UsersController(
+            @Autowired UsersService usersService,
+            @Autowired ModelMapper modelMapper
+    ) {
         this.usersService = usersService;
+        this.modelMapper = modelMapper;
     }
 
-    @PostMapping("/signnup")
-    ResponseEntity<UserResponseDTO> signupUser(){
+    @PostMapping("/signup")
+    ResponseEntity<UserResponseDTO> signupUser(@RequestBody CreateUserRequestDTO createUserRequestDTO){
 
-        // TODO 01:
-        // 1. create a UserSignupDTO
-        return null;
+        var savedUser = usersService.createUser(
+                createUserRequestDTO.getUsername(),
+                createUserRequestDTO.getPassword(),
+                createUserRequestDTO.getEmail()
+
+        );
+        var userResponse = modelMapper.map(savedUser,UserResponseDTO.class);
+        return ResponseEntity.accepted().body(userResponse);
 
     }
 
     @PostMapping("/login")
-    ResponseEntity<UserResponseDTO> loginUser(){
+    ResponseEntity<UserResponseDTO> loginUser(@RequestBody LoginUserRequestDTO loginUserRequestDTO){
+
+        var savedUser = usersService.loginUser(
+                loginUserRequestDTO.getUsername(),
+                loginUserRequestDTO.getPassword()
+        );
 
 
-        return null;
+        var userResponse = modelMapper.map(savedUser, UserResponseDTO.class);
+
+        return ResponseEntity.accepted().body(userResponse);
+
     }
 
     @PatchMapping("/{id}")

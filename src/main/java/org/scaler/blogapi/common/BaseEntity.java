@@ -3,6 +3,7 @@ package org.scaler.blogapi.common;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.util.Date;
@@ -17,8 +18,7 @@ public abstract class BaseEntity {
 
     UUID id;
 
-    @CreatedDate
-
+    @CreationTimestamp
     Date createdAt;
 
 }
