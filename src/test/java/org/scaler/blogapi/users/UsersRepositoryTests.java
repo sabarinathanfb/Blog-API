@@ -3,6 +3,7 @@ package org.scaler.blogapi.users;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.scaler.blogapi.articles.ArticleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
@@ -16,15 +17,14 @@ public class UsersRepositoryTests {
     @Test
     public void createUser(){
 
-        UserEntity userEntity = new UserEntity(
-                "sabari123",
-                "sabari@123.com",
-                "sabari123",
-                "sabari is a honest person"
-        );
+        UserEntity userEntity =  UserEntity.builder()
+                .username("sabari123")
+                .email("sabari@123.com")
+                .password("sabari123")
+                .build();
+
         var users = usersRepository.save(userEntity);
         Assertions.assertNotNull(users.getId());
-
     }
 
     @Test
@@ -33,14 +33,12 @@ public class UsersRepositoryTests {
         UserEntity userEntity1 = new UserEntity(
                 "gokul",
                 "gokul@123.com",
-                "gokul123",
-                "gokul is a Nice person"
+                "gokul123"
         );
         UserEntity userEntity2 = new UserEntity(
                 "keeri",
                 "keeri@123.com",
-                "keeri123",
-                "keeri is a Good person"
+                "keeri123"
         );
 
         usersRepository.save(userEntity1);
