@@ -2,6 +2,7 @@ package org.scaler.blogapi.articles;
 
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,9 +22,11 @@ public class ArticlesController {
     }
 
     @PostMapping("")
-    ResponseEntity<String> createArticle() {
+    ResponseEntity<String> createArticle(
+            @AuthenticationPrincipal String username
+    ) {
 
-        return ResponseEntity.accepted().body("Article created Successfully");
+        return ResponseEntity.accepted().body("Article created "+ username + " Successfully");
     }
 
     @PatchMapping("/{id}")

@@ -1,20 +1,19 @@
-package org.scaler.blogapi.security.jwt;
+package org.scaler.blogapi.security.tokens;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.scaler.blogapi.security.TokenService;
 import org.scaler.blogapi.security.UserAuthentication;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationManagerResolver;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationConverter;
 import org.springframework.security.web.authentication.AuthenticationFilter;
 
-public class JwtAuthenticationFilter extends AuthenticationFilter {
+public class UserAuthenticationFilter extends AuthenticationFilter {
 
-    public JwtAuthenticationFilter(TokenService tokenService) {
-        super(new JwtAuthenticationManager(tokenService), new JwtAuthenticationConverter());
+    public UserAuthenticationFilter(TokenService tokenService) {
+        super(new UserAuthenticationManager(tokenService), new BearerTokenAuthenticationConverter());
 
         /**
          * Every time authentication succeeds, we want to set the Authentication Object in the SecurityContext of Spring
@@ -28,7 +27,7 @@ public class JwtAuthenticationFilter extends AuthenticationFilter {
      * This class is responsible for converting the request into an Authentication Object
      */
 
-    static class JwtAuthenticationConverter implements AuthenticationConverter {
+    static class BearerTokenAuthenticationConverter implements AuthenticationConverter {
 
 
         @Override
@@ -42,11 +41,11 @@ public class JwtAuthenticationFilter extends AuthenticationFilter {
         }
     }
 
-    static class JwtAuthenticationManager implements AuthenticationManager{
+    static class UserAuthenticationManager implements AuthenticationManager{
 
         private final TokenService tokenService;
 
-        public JwtAuthenticationManager(TokenService tokenService) {
+        public UserAuthenticationManager(TokenService tokenService) {
             this.tokenService = tokenService;
         }
 
