@@ -1,4 +1,4 @@
-package org.scaler.blogapi.tokens;
+package org.scaler.blogapi.security.tokens;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;

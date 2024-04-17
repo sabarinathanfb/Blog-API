@@ -1,4 +1,4 @@
-package org.scaler.blogapi.tokens;
+package org.scaler.blogapi.security.tokens;
 
 import org.scaler.blogapi.security.TokenService;
 import org.scaler.blogapi.users.UsersRepository;

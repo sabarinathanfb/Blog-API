@@ -58,6 +58,18 @@ public class UsersController {
 
     }
 
+    @GetMapping("/me")
+    ResponseEntity<UserResponseDTO> getCurrentUser(){
+
+        return null;
+    }
+
+    @GetMapping("/{id}")
+    ResponseEntity<UserResponseDTO> getUserById(){
+
+        return null;
+    }
+
     @PatchMapping("/{id}")
     ResponseEntity<UserResponseDTO> updateUser(){
 

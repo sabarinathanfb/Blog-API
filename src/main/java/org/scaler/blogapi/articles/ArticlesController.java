@@ -20,10 +20,10 @@ public class ArticlesController {
         return null;
     }
 
-    @PostMapping("/{id}")
-    ResponseEntity<Void> createArticle() {
+    @PostMapping("")
+    ResponseEntity<String> createArticle() {
 
-        return null;
+        return ResponseEntity.accepted().body("Article created Successfully");
     }
 
     @PatchMapping("/{id}")
@@ -44,7 +44,7 @@ public class ArticlesController {
         return null;
     }
 
-    @PostMapping("")
+    @PostMapping("/{id}")
     ResponseEntity<Void> unlikeArticle(){
 
         return null;

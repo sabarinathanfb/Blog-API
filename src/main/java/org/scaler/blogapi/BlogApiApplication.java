@@ -1,10 +1,10 @@
 package org.scaler.blogapi;
 
 import org.modelmapper.ModelMapper;
-import org.scaler.blogapi.security.JWTTokenService;
+import org.scaler.blogapi.security.jwt.JWTTokenService;
 import org.scaler.blogapi.security.TokenService;
-import org.scaler.blogapi.tokens.UserTokenRepository;
-import org.scaler.blogapi.tokens.UserTokenService;
+import org.scaler.blogapi.security.tokens.UserTokenRepository;
+import org.scaler.blogapi.security.tokens.UserTokenService;
 import org.scaler.blogapi.users.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -22,7 +22,7 @@ public class BlogApiApplication {
 		SpringApplication.run(BlogApiApplication.class, args);
 	}
 
-	private final static String TOKEN_SERVICE_TYPE = "SST";
+	private final static String TOKEN_SERVICE_TYPE = "JWT";
 
 	@Bean
 	@Scope(BeanDefinition.SCOPE_SINGLETON)

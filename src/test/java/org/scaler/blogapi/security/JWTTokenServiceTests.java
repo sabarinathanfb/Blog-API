@@ -2,7 +2,7 @@ package org.scaler.blogapi.security;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.security.core.parameters.P;
+import org.scaler.blogapi.security.jwt.JWTTokenService;
 
 public class JWTTokenServiceTests {
 
